@@ -5,6 +5,13 @@
 	let dealer = [];
 	let player = [];
 
+	let play = document.getElementById("play");
+
+	play.addEventListener('click', function() {
+		deal();
+		console.log("click");
+	});
+
 	function shuffle() {
 
         // Fisher–Yates Shuffle        
@@ -30,7 +37,7 @@
             array[m] = array[i];
             array[i] = t;
         }
-
+		
         return array;
 	}
 	
@@ -42,10 +49,14 @@
 		player.push(deck[0], deck[2]);
 		dealer.push(deck[1], deck[3]);
 		
+		console.log(`Player deck: ${player} \nDealer deck: ${dealer}`);
+
 	 	// Calculate the hand values for both hands.
-		var playerHandValue = getHandValue(player);
-		var dealerHandValue = getHandValue(dealer);
+		let playerHandValue = getHandValue(player);
+		let dealerHandValue = getHandValue(dealer);
 		
+		console.log(`Player hand value: ${playerHandValue} \nDealer hand value: ${dealerHandValue}`);
+
 		// Call showWinner if either hand has a Blackjack.
 		if(playerHandValue === 21) {
 			showWinner();
@@ -82,18 +93,50 @@
 	}
 
 	function getHandValue(hand) {
+		// Create separate arrays for aces and non-aces.
+		var handValue = 0;
+		let aces = hand.filter(card => { return (card.charAt(0) === "A"); });
+
+		console.log(`Aces array length: ${aces.length} \nAces array contents: ${aces}`);
+
 		// Return a numeric value for the cards in a hand.
-		
+		hand.forEach(card => {
+			handValue += getCardValue(card);
+		});
+
+		// Reduce an ace's value to 1 if the hand would be over 21 otherwise
+		if(aces.length !== 0) {
+			aces.forEach(card => {
+				if(handValue > 21) {
+					handValue -= 10;
+				}
+			});
+		}
+
+		return handValue;
 	}
 
 	function getCardValue(card) {
 		// Return a numeric value for a single card.
-	
+		let cardValue = 0;
+		card = card.slice(0, -1); // Remove the card's suit
+		
+		if(card === "J" || card === "Q" || card === "K") {
+			cardValue += 10;
+		}
+		else if(card === "A") {
+			cardValue += 11; // Alternate case is dealt with in getHandValue
+		}
+		else {
+			cardValue += Number(card);
+		}
+
+		return cardValue;
 	}
 
 	function showWinner() {
 		// Display the hand winner.
-	
+		console.log("Someone won!")
 		
 		// Display the 'Play Again' button.
 	
