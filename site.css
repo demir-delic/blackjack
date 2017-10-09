@@ -1,5 +1,5 @@
 .card {
-    display: inline-block;
+    display: none;
     height: 200px;
     margin-left: 10px;
     margin-right: 10px;
@@ -13,7 +13,7 @@
     margin: 25px 10px 25px 10px;
 }
 
-#play {
+/*#play {
     height: 67px;
     width: 100px;
-}
+}*/
