@@ -36,18 +36,23 @@
 	
 	function deal() {
 		// Call the shuffle function.
-
+		deck = shuffle();
 		
 		// Deal cards to the player and dealer.
-
+		player.push(deck[0], deck[2]);
+		dealer.push(deck[1], deck[3]);
 		
 	 	// Calculate the hand values for both hands.
-
+		var playerHandValue = getHandValue(player);
+		var dealerHandValue = getHandValue(dealer);
 		
-		// Determine whether either hand has a Blackjack.
-
-		
-		// If either hand is a Blackjack call showWinner.
+		// Call showWinner if either hand has a Blackjack.
+		if(playerHandValue === 21) {
+			showWinner();
+		}
+		else if(dealerHandValue === 21) {
+			showWinner();
+		}
 
 	}
 
@@ -76,12 +81,12 @@
 
 	}
 
-	function getHandValue() {
+	function getHandValue(hand) {
 		// Return a numeric value for the cards in a hand.
-
+		
 	}
 
-	function getCardValue() {
+	function getCardValue(card) {
 		// Return a numeric value for a single card.
 	
 	}
@@ -96,10 +101,11 @@
 
 	function playAgain() {
 		// Clear the dealer and player hands.
-	
+		player = [];
+		dealer = [];
 		
 		// Call the deal function.
-	
+		deal();
 	}
 
 })();

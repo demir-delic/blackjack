@@ -1,0 +1,19 @@
+.card {
+    display: inline-block;
+    height: 200px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#hit, #stand {
+    display: none;
+}
+
+#dealer, #player {
+    margin: 25px 10px 25px 10px;
+}
+
+#play {
+    height: 67px;
+    width: 100px;
+}
