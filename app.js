@@ -32,6 +32,74 @@
         }
 
         return array;
-    }
+	}
+	
+	function deal() {
+		// Call the shuffle function.
+
+		
+		// Deal cards to the player and dealer.
+
+		
+	 	// Calculate the hand values for both hands.
+
+		
+		// Determine whether either hand has a Blackjack.
+
+		
+		// If either hand is a Blackjack call showWinner.
+
+	}
+
+	function hit() {
+		// Add another card to the player hand.
+
+		
+		// Calculate the player's hand value.
+
+		
+		// If the value is greater than 21 call showWinner.
+
+	}
+
+	function stand() {
+		// Enter the dealer hit phase.
+
+		
+		// The dealer must hit on 16 or less.
+		
+		
+		// If dealer hits, deal another card and calculate total. End hand if the dealer busts.
+		
+		
+		// When the dealer stands (total is over 16 and under 22) determine winner or push and end the hand.
+
+	}
+
+	function getHandValue() {
+		// Return a numeric value for the cards in a hand.
+
+	}
+
+	function getCardValue() {
+		// Return a numeric value for a single card.
+	
+	}
+
+	function showWinner() {
+		// Display the hand winner.
+	
+		
+		// Display the 'Play Again' button.
+	
+	}
+
+	function playAgain() {
+		// Clear the dealer and player hands.
+	
+		
+		// Call the deal function.
+	
+	}
 
 })();
