@@ -12,17 +12,14 @@
 
 	playButton.addEventListener("click", function() {
 		playAgain();
-		console.log("deal");
 	});
 
 	hitButton.addEventListener("click", function() {
-		hit();
-		console.log("hit");
+		hit(player, "playerCardsDiv");
 	});
 
 	standButton.addEventListener("click", function() {
 		stand();
-		console.log("stand");
 	});
 
 	function shuffle() {
@@ -63,65 +60,58 @@
 		dealer.push(deck[1], deck[3]);
 		deck.splice(0, 4);
 		
-		cards[0].src = `/img/${dealer[0]}.png`;
-		cards[2].src = `/img/${player[0]}.png`;
-		cards[3].src = `/img/${player[1]}.png`;		
+		cards[0].src = `img/${dealer[0]}.png`;
+		cards[2].src = `img/${player[0]}.png`;
+		cards[3].src = `img/${player[1]}.png`;
 
-		console.log(`Player hand: ${player} \nDealer hand: ${dealer}`);
+		console.log(`Dealer hand: ${dealer} \nPlayer hand: ${player}`);
 
 	 	// Calculate the hand values for both hands.
-		let playerHandValue = getHandValue(player);
 		let dealerHandValue = getHandValue(dealer);
+		let playerHandValue = getHandValue(player);
 		
-		console.log(`Player hand value: ${playerHandValue} \nDealer hand value: ${dealerHandValue}`);
+		console.log(`Dealer hand value: ${dealerHandValue} \nPlayer hand value: ${playerHandValue}`);
 
 		// Call showWinner if either hand has a Blackjack.
-		if(playerHandValue === dealerHandValue === 21)
-		{
-			showWinner("tie")
-		}
-		else if(playerHandValue === 21) {
-			showWinner("player");
-		}
-		else if(dealerHandValue === 21) {
-			showWinner("dealer");
-		}
-
+		if (playerHandValue === 21 || dealerHandValue === 21) { showWinner(); }
 	}
 
-	function hit() {
+	function hit(hand, div) {
 		// Add another card to the player hand.
-		player.push(deck[0]);
+		hand.push(deck[0]);
 
-		let img = document.createElement('img');
-		img.classList.add("card", "temporary");
-		img.src = `/img/${deck[0]}.png`;
+		let img = document.createElement("img");
+		img.classList.add("card", "temp");
+		img.src = `img/${deck[0]}.png`;
 		img.style = "display: inline-block";
-		document.getElementById('player').appendChild(img);
+		document.getElementById(div).appendChild(img);
 
 		deck.splice(0, 1);
 		
 		// Calculate the player's hand value.
-		let playerHandValue = getHandValue(player);
+		let handValue = getHandValue(hand);
 		
-		console.log(`Player hand: ${player} \nPlayer hand value: ${playerHandValue}`);
+		console.log(`Hand: ${hand} \nHand value: ${handValue}`);	
 
 		// If the value is greater than 21 call showWinner.
-		if (playerHandValue > 21) { showWinner("dealer"); }
+		if(handValue > 21) { showWinner(); }
 	}
 
 	function stand() {
-		// Enter the dealer hit phase.
-		
+		// Show the dealer's second card.
+		cards[1].src = `img/${dealer[1]}.png`;
 		
 		// The dealer must hit on 16 or less.
-		
-		
-		// If dealer hits, deal another card and calculate total. End hand if the dealer busts.
-		
+		// If dealer hits, deal another card and calculate total.
+		let dealerHandValue = getHandValue(dealer);
+
+		while(dealerHandValue < 17) {
+			hit(dealer, "dealerCardsDiv");
+			dealerHandValue = getHandValue(dealer);
+		}
 		
 		// When the dealer stands (total is over 16 and under 22) determine winner or push and end the hand.
-
+		showWinner();
 	}
 
 	function getHandValue(hand) {
@@ -129,7 +119,7 @@
 		var handValue = 0;
 		let aces = hand.filter(card => { return (card.charAt(0) === "A"); });
 
-		console.log(`Aces array length: ${aces.length} \nAces array contents: ${aces}`);
+		//console.log(`Aces array length: ${aces.length} \nAces array contents: ${aces}`);
 
 		// Return a numeric value for the cards in a hand.
 		hand.forEach(card => {
@@ -166,16 +156,38 @@
 		return cardValue;
 	}
 
-	function showWinner(winnerName) {
+	function showWinner() {
 		// Display the hand winner.
-		if(winnerName === "player") {
-			console.log("You won!");
+		cards[1].src = `img/${dealer[1]}.png`;		
+		
+		let dealerHandValue = getHandValue(dealer);
+		let playerHandValue = getHandValue(player);
+		
+		if (dealerHandValue === playerHandValue) {
+			console.log("Tie - hands are equal in value");
 		}
-		else if (winnerName === "dealer") {
-			console.log("You lost!");
+		else if (dealerHandValue > playerHandValue) {
+			if(dealerHandValue === 21) {
+				console.log("Loss - dealer has Blackjack");
+			}
+			else if(dealerHandValue > 21) {
+				console.log("Win - dealer busted");
+				//winnerDiv.classList.add('alert-success');
+			}
+			else {
+				console.log("Loss - dealer's hand is better than player's");
+			}
 		}
 		else {
-			console.log("You tied!");
+			if(playerHandValue === 21) {
+				console.log("Win - player has Blackjack");
+			}
+			else if(playerHandValue > 21) {
+				console.log("Loss - player busted");
+			}
+			else {
+				console.log("Win - player's hand is better than dealer's");
+			}
 		}
 		
 		// Display the 'Play Again' button.
@@ -189,22 +201,31 @@
 		// Clear the dealer and player hands.
 		player = [];
 		dealer = [];
-
-		console.log(`Total cards in play: ${cards}`);
-		let extraCards = document.getElementsByClassName("temporary");
+		cards[1].src = `img/back.png`;
+		
+		// Remove all <img>s other than the original four
+		//console.log(`Total cards in play: ${cards}`);
+		let extraCards = document.getElementsByClassName("temp");
 
 		while(extraCards[0]) {
 			extraCards[0].parentNode.removeChild(extraCards[0]);
 		}
 
+		// 
 		for(i = 0; i < cards.length; i++) { cards[i].style = "display: inline-block"; }
-		console.log(`Total cards in play: ${cards}`);
+		//console.log(`Total cards in play: ${cards}`);
 		
 		playButton.style = "display: none;"
 		hitButton.style = "display: inline-block";
 		standButton.style = "display: inline-block";
+
 		// Call the deal function.
 		deal();
 	}
+
+	/*function showDealerFacedownCard() {
+		var facedownCard= document.getElementById(dea)
+		facedownCard.src = "";
+	}*/
 
 })();
