@@ -9,7 +9,7 @@
     display: none;
 }
 
-#dealer, #player {
+#dealerCardsDiv, #playerCardsDiv {
     margin: 25px 10px 25px 10px;
 }
 
