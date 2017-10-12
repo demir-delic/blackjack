@@ -9,6 +9,7 @@
 	let hitButton = document.getElementById("hit");	
 	let standButton = document.getElementById("stand");
 	let cards = document.getElementsByClassName("card");
+	//let vh = document.body;
 
 	playButton.addEventListener("click", function() {
 		playAgain();
@@ -191,7 +192,7 @@
 		}
 		
 		// Display the 'Play Again' button.
-		playButton.innerHTML = "Play Again";
+		playButton.textContent = "Play Again";
 		playButton.classList.remove("hidden");
 		hitButton.classList.add("hidden");
 		standButton.classList.add("hidden");
@@ -224,9 +225,8 @@
 		deal();
 	}
 
-	/*function showDealerFacedownCard() {
-		var facedownCard= document.getElementById(dea)
-		facedownCard.src = "";
+	/*function calcViewportHeight {
+		
 	}*/
 
 })();
