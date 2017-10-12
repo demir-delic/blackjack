@@ -17,28 +17,21 @@ html, body, #bg {
     background-size: cover;
 }
 
-.card {
-    height: 200px;
+#gameTitleDiv, #dealerCardsDiv {
+    margin-top: 25px;    
+}
+
+#dealerCardsDiv, #playerCardsDiv, .card{
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.card {
+    height: 200px;
     margin-bottom: 20px;
 }
 
 #buttons {
-    margin: 5px 5px 25px 5px; 
+    margin: 25px 5px 25px 5px; 
     color: #333333;
-}
-
-#dealerCardsDiv, #playerCardsDiv,{
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-#dealerCardsDiv {
-    margin-top: 25px;
-    margin-bottom: 25px;    
-}
-
-#playerCardsDiv {
-    margin-bottom: 25px;
 }
