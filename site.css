@@ -51,7 +51,7 @@ html, body, #bg {
     margin-right: 5px;
 }
 
-@media (min-width: 480px) {
+@media (max-width: 480px) {
     .card {
         height: 150px;
     }
