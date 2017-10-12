@@ -94,7 +94,7 @@
 		console.log(`Hand: ${hand} \nHand value: ${handValue}`);	
 
 		// If the value is greater than 21 call showWinner.
-		if(handValue > 21) { showWinner(); }
+		if(handValue >= 21) { showWinner(); }
 	}
 
 	function stand() {
