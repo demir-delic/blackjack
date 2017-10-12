@@ -26,6 +26,10 @@ html, body, #bg {
     margin-right: 10px;
 }
 
+#winnerDiv {
+    border-radius: 6px;
+}
+
 .card {
     height: 200px;
     margin-bottom: 20px;
@@ -34,4 +38,8 @@ html, body, #bg {
 #buttons {
     margin: 25px 5px 25px 5px; 
     color: #333333;
+}
+
+#hit {
+    margin-right: 5px;
 }

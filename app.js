@@ -9,7 +9,7 @@
 	let hitButton = document.getElementById("hit");	
 	let standButton = document.getElementById("stand");
 	let cards = document.getElementsByClassName("card");
-	//let vh = document.body;
+	let winner = document.getElementById("winner");
 
 	playButton.addEventListener("click", function() {
 		playAgain();
@@ -165,29 +165,35 @@
 		let playerHandValue = getHandValue(player);
 		
 		if (dealerHandValue === playerHandValue) {
-			console.log("Tie - hands are equal in value");
+			winner.textContent = "Push - hands are equal in value";
+			winnerDiv.classList.add("alert-warning");							
 		}
-		else if (dealerHandValue > playerHandValue) {
-			if(dealerHandValue === 21) {
-				console.log("Loss - dealer has Blackjack");
+		else if (playerHandValue > dealerHandValue) {
+			if(playerHandValue === 21) {
+				winner.textContent = "Win - you have Blackjack";
+				winnerDiv.classList.add("alert-success");				
 			}
-			else if(dealerHandValue > 21) {
-				console.log("Win - dealer busted");
-				//winnerDiv.classList.add('alert-success');
+			else if(playerHandValue > 21) {
+				winner.textContent = "Loss - you busted";
+				winnerDiv.classList.add("alert-danger");				
 			}
 			else {
-				console.log("Loss - dealer's hand is better than player's");
+				winner.textContent = "Win - your hand is better than dealer's";
+				winnerDiv.classList.add("alert-success");				
 			}
 		}
 		else {
-			if(playerHandValue === 21) {
-				console.log("Win - player has Blackjack");
+			if(dealerHandValue === 21) {
+				winner.textContent = "Loss - dealer has Blackjack";
+				winnerDiv.classList.add("alert-danger");								
 			}
-			else if(playerHandValue > 21) {
-				console.log("Loss - player busted");
+			else if(dealerHandValue > 21) {
+				winner.textContent = "Win - dealer busted";
+				winnerDiv.classList.add("alert-success");
 			}
 			else {
-				console.log("Win - player's hand is better than dealer's");
+				winner.textContent = "Loss - dealer's hand is better than yours";
+				winnerDiv.classList.add("alert-danger");								
 			}
 		}
 		
@@ -202,6 +208,10 @@
 		// Clear the dealer and player hands.
 		player = [];
 		dealer = [];
+		winner.textContent = "";
+		winnerDiv.classList.remove("alert-success");											
+		winnerDiv.classList.remove("alert-warning");
+		winnerDiv.classList.remove("alert-danger");											
 		cards[1].src = `img/back.png`;
 		
 		// Remove all <img>s other than the original four
