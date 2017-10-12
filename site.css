@@ -17,6 +17,13 @@ html, body, #bg {
     background-size: cover;
 }
 
+#introDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #gameTitleDiv, #dealerCardsDiv {
     margin-top: 25px;    
 }

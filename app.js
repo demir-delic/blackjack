@@ -10,6 +10,7 @@
 	let standButton = document.getElementById("stand");
 	let cards = document.getElementsByClassName("card");
 	let winner = document.getElementById("winner");
+	let introDiv = document.getElementById("introDiv");
 
 	playButton.addEventListener("click", function() {
 		playAgain();
@@ -208,11 +209,15 @@
 		// Clear the dealer and player hands.
 		player = [];
 		dealer = [];
+
 		winner.textContent = "";
 		winnerDiv.classList.remove("alert-success");											
 		winnerDiv.classList.remove("alert-warning");
-		winnerDiv.classList.remove("alert-danger");											
+		winnerDiv.classList.remove("alert-danger");		
+
 		cards[1].src = `img/back.png`;
+
+		introDiv.style = "position: initial; top: initial; left: initial; transform: initial;"
 		
 		// Remove all <img>s other than the original four
 		//console.log(`Total cards in play: ${cards}`);
