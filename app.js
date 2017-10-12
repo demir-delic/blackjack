@@ -73,8 +73,8 @@
 		
 		console.log(`Dealer hand value: ${dealerHandValue} \nPlayer hand value: ${playerHandValue}`);
 
-		// Call showWinner if either hand has a Blackjack.
-		if (playerHandValue === 21 || dealerHandValue === 21) { showWinner(); }
+		// Call showWinner if player has a Blackjack.
+		if (playerHandValue === 21) { showWinner(); }
 	}
 
 	function hit(hand, div) {
