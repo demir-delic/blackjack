@@ -43,3 +43,9 @@ html, body, #bg {
 #hit {
     margin-right: 5px;
 }
+
+@media (min-width: 480px) {
+    .card {
+        height: 150px;
+    }
+}
