@@ -192,9 +192,9 @@
 		
 		// Display the 'Play Again' button.
 		playButton.innerHTML = "Play Again";
-		playButton.style = "display: inline-block;"
-		hitButton.style = "display: none";
-		standButton.style = "display: none";
+		playButton.classList.remove("hidden");
+		hitButton.classList.add("hidden");
+		standButton.classList.add("hidden");
 	}
 
 	function playAgain() {
@@ -211,13 +211,14 @@
 			extraCards[0].parentNode.removeChild(extraCards[0]);
 		}
 
-		// 
 		for(i = 0; i < cards.length; i++) { cards[i].style = "display: inline-block"; }
 		//console.log(`Total cards in play: ${cards}`);
 		
-		playButton.style = "display: none;"
-		hitButton.style = "display: inline-block";
-		standButton.style = "display: inline-block";
+		playButton.classList.add("hidden");
+		hitButton.classList.remove("hidden");
+		standButton.classList.remove("hidden");
+		dealerCardsDiv.classList.remove("hidden");
+		playerCardsDiv.classList.remove("hidden");
 
 		// Call the deal function.
 		deal();
